@@ -17,7 +17,7 @@ $tmpDir = "$baseDir/tmp";
 // }
 // Blast details, change to adapt to local settings
 // Blast databases should be created using the appropriate programs.
-$blastHome = "/home/dbw00/blast";
+$blastHome = "/home/gelpi/blast";
 $blastDbsDir = "$blastHome/DBS";
 $blastExe = "$blastHome/bin/blastp";
 $blastDbs = array("SwissProt" => "sprot", "PDB" => "pdb");
@@ -26,7 +26,8 @@ $blastCmdLine = "$blastExe -db $blastDbsDir/" . $blastDbs['PDB'] . " -evalue 0.0
 // Include directory
 $incDir = "$baseDir/include";
 
-// Load accessory routines
+$secretsFile = "/home/gelpi/.secrets.inc.php";
+
 include_once "$incDir/bdconn.inc.php";
 include_once "$incDir/libDBW.inc.php";
 
