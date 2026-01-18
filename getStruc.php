@@ -79,13 +79,13 @@ if (mysqli_num_rows($rsA)) {
             </td>
         </tr>
         <tr>
-            <td>Ascession Date</td>
-            <td><?= $data['ascessionDate'] ?></td>
+            <td>Accession Date</td>
+            <td><?= $data['accessionDate'] ?></td>
         </tr>
         <tr>
-            <!--$expTypeArray is generated in globals.inc.php-->
+            <!--$expTypesArray is generated in globals.inc.php-->
             <td>Experiment type</td> 
-            <td colspan="2"><?= $expTypeArray[$data['idExpType']]['ExpType'] ?></td>
+            <td colspan="2"><?= $expTypesArray[$data['idExpType']]['ExpType'] ?></td>
         </tr>
         <tr>
             <td>Authors</td>

@@ -6,7 +6,7 @@
 // Base directories
 // Automatic, taken from CGI variables.
 $baseDir = dirname($_SERVER['SCRIPT_FILENAME']);
-#$baseDir = '/home/gelpi/DEVEL/WWW/DBW/PDBBrowser';
+
 $baseURL = dirname($_SERVER['SCRIPT_NAME']);
 
 // Temporal dir, create if not exists, however Web server 
@@ -17,7 +17,7 @@ $tmpDir = "$baseDir/../tmp";
 // }
 // Blast details, change to adapt to local settings
 // Blast databases should be created using the appropriate programs.
-$blastHome = "/home/dbw00/blast";
+$blastHome = "/home/gelpi/blast";
 $blastDbsDir = "$blastHome/DBS";
 $blastExe = "$blastHome/bin/blastp";
 $blastDbs = array("SwissProt" => "sprot", "PDB" => "pdb");
@@ -35,20 +35,20 @@ include_once "$incDir/libDBW.inc.php";
 $textFields = ['e.header', 'e.compound', 'a.author', 's.source', 'sq.header'];
 
 // Compounds
-$rs = mysqli_query($mysqli, "SELECT * from comptype") or print mysqli_error($mysqli);
+$rs = mysqli_query($mysqli, "SELECT * from compTypes") or print mysqli_error($mysqli);
 while ($rsF = mysqli_fetch_assoc($rs)) {
-    $compTypeArray[$rsF['idCompType']] = $rsF['type'];
+    $compTypesArray[$rsF['idCompType']] = $rsF['type'];
 }
 
 //expTypes
-$rs = mysqli_query($mysqli,"SELECT * from expType") or print mysqli_error($mysqli);
+$rs = mysqli_query($mysqli,"SELECT * from expTypes") or print mysqli_error($mysqli);
 while ($rsF = mysqli_fetch_assoc($rs)) {
-    $expTypeArray[$rsF['idExpType']] = $rsF;
+    $expTypesArray[$rsF['idExpType']] = $rsF;
 }
 //expClasses
-$rs = mysqli_query($mysqli,"SELECT * from expClasse") or print mysqli_error($mysqli);
+$rs = mysqli_query($mysqli,"SELECT * from expClasses") or print mysqli_error($mysqli);
 while ($rsF = mysqli_fetch_assoc($rs)) {
-    $expClasseArray[$rsF['idExpClasse']] = $rsF['expClasse'];
+    $expClassesArray[$rsF['idExpClasse']] = $rsF['expClasse'];
 }
 // Start session to store queries
 session_start();

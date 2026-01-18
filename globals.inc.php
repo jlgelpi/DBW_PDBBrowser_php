@@ -38,18 +38,18 @@ $textFields = ['e.header', 'e.compound', 'a.author', 's.source', 'sq.header'];
 // Compounds
 $rs = mysqli_query($mysqli, "SELECT * from compTypes") or print mysqli_error($mysqli);
 while ($rsF = mysqli_fetch_assoc($rs)) {
-    $compTypeArray[$rsF['idCompType']] = $rsF['type'];
+    $compTypesArray[$rsF['idCompType']] = $rsF['type'];
 }
 
 //expTypes
 $rs = mysqli_query($mysqli,"SELECT * from expTypes") or print mysqli_error($mysqli);
 while ($rsF = mysqli_fetch_assoc($rs)) {
-    $expTypeArray[$rsF['idExpType']] = $rsF;
+    $expTypesArray[$rsF['idExpType']] = $rsF;
 }
 //expClasses
 $rs = mysqli_query($mysqli,"SELECT * from expClasses") or print mysqli_error($mysqli);
 while ($rsF = mysqli_fetch_assoc($rs)) {
-    $expClasseArray[$rsF['idExpClasse']] = $rsF['expClasse'];
+    $expClassesArray[$rsF['idExpClasse']] = $rsF['expClasse'];
 }
 // Start session to store queries
 session_start();

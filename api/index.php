@@ -8,7 +8,7 @@ $op = array_keys($_REQUEST)[0];
 
 switch ($op) {
     case "glob":
-        $data = ['compType' => $compTypeArray, 'expType' => $expTypeArray, 'expClasse' => $expClasseArray];
+        $data = ['compTypes' => $compTypeArray, 'expTypes' => $expTypeArray, 'expClasses' => $expClasseArray];
         break;
     case "blast":
         $data = blast($_REQUEST['blast']);
@@ -69,7 +69,7 @@ function search($searchInput) {
     //  main SQL string, make sure that all tables are joint, and relationships included
     // SELECT columns FROM tables WHERE Conditions_from_relationships AND Conditions_from_query_Form
     $sql = "SELECT distinct e.idCode,e.header,e.compound,e.resolution,s.source,et.expType FROM 
-        expType et, author_has_entry ae, author a, source s, entry_has_source es, entry e, sequence sq WHERE
+        expTypes et, author_has_entry ae, authors a, sources s, entry_has_source es, entries e, sequences sq WHERE
         e.idExpType=et.idExpType AND
         ae.idCode=e.idCode and ae.idAuthor=a.idAuthor AND
         es.idCode=e.idCode and es.idsource=s.idSource AND
@@ -149,17 +149,17 @@ function blast($sequence) {
 function show($idCode) {
     global $mysqli;
     $data = [];
-    $sql = "SELECT e.* from entry e where e.idCode='$idCode'";
+    $sql = "SELECT e.* from entries e where e.idCode='$idCode'";
     $rs = mysqli_query($mysqli, $sql) or print mysqli_error($mysqli);
     if (!mysqli_num_rows($rs)) { //search is empty
         return ['error'=> 404, 'message' => 'The requested structure is not available'];
     }
     // Get Main entry
     $data = mysqli_fetch_assoc($rs);
-    $data['ExpType'] = $GLOBALS['expTypeArray'][$data['idExpType']]['ExpType'];
+    $data['ExpType'] = $GLOBALS['expTypesArray'][$data['idExpType']]['ExpType'];
     // new DB query to get authors
     $data['auts'] = '';
-    $rsA = mysqli_query($mysqli, "SELECT * from author a, author_has_entry ae where ae.idCode='" . $data['idCode'] . "' and a.idAuthor = ae.idAuthor order by a.author") or print mysqli_error($mysqli);
+    $rsA = mysqli_query($mysqli, "SELECT * from authors a, author_has_entry ae where ae.idCode='" . $data['idCode'] . "' and a.idAuthor = ae.idAuthor order by a.author") or print mysqli_error($mysqli);
     if (mysqli_num_rows($rsA)) {
         $data['auts'] = [];
         while ($rsAF = mysqli_fetch_assoc($rsA)) {
@@ -167,7 +167,7 @@ function show($idCode) {
         }
     }
     // new DB query to get sources
-    $rsA = mysqli_query($mysqli, "SELECT * from source s, entry_has_source es where es.idCode='" . $data['idCode'] . "' and s.idSource = es.idSource order by s.source") or print mysqli_error($mysqli);
+    $rsA = mysqli_query($mysqli, "SELECT * from sources s, entry_has_source es where es.idCode='" . $data['idCode'] . "' and s.idSource = es.idSource order by s.source") or print mysqli_error($mysqli);
     $data['sources'] = '';
     if (mysqli_num_rows($rsA)) {
         $data['sources'] = [];
@@ -178,7 +178,7 @@ function show($idCode) {
     // new DB query to get sequences, output in FASTA format
     $data['sequences'] = [];
     $data['sequencesFASTA'] = [];
-    $rsA = mysqli_query($mysqli, "SELECT * from sequence s where s.idCode='" . $data['idCode'] . "' order by s.chain") or print mysqli_error($mysqli);
+    $rsA = mysqli_query($mysqli, "SELECT * from sequences s where s.idCode='" . $data['idCode'] . "' order by s.chain") or print mysqli_error($mysqli);
     if (mysqli_num_rows($rsA)) {
         while ($sq = mysqli_fetch_assoc($rsA)) { 
             $data['sequences'][] = $sq;

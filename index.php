@@ -52,9 +52,9 @@ if (isset($_REQUEST['new']) or !isset($_SESSION['queryData'])) {
             <div class="form-group">
                 <label>Compound Type:</label>
                 <div class="form-check">
-                    <!-- input options from $compTypeArray[] array -->
-                    <?php foreach (array_keys($compTypeArray) as $idCompType ) {?>
-                        <input class="form-check-input" type="checkbox" name="idCompType[<?= $idCompType ?>]" /> <?= $compTypeArray[$idCompType]."\n" ?>                       
+                    <!-- input options from $compTypesArray[] array -->
+                    <?php foreach (array_keys($compTypesArray) as $idCompType ) {?>
+                        <input class="form-check-input" type="checkbox" name="idCompType[<?= $idCompType ?>]" /> <?= $compTypesArray[$idCompType]."\n" ?>                       
                     <?php } ?>
                 </div>
             </div>
@@ -66,9 +66,9 @@ if (isset($_REQUEST['new']) or !isset($_SESSION['queryData'])) {
             <div class="form-group">
                 <label>Exp. Type:</label>
                 <div class="form-check">
-                    <!-- input options from $expClasseArray -->
-                    <?php foreach (array_keys($expClasseArray) as $idExpClasse) { ?>
-                        <input class="form-check-input" type="checkbox" name="idExpClasse[<?= $idExpClasse ?>]" /> <?= $expClasseArray[$idExpClasse] . "\n" ?>
+                    <!-- input options from $expClassesArray -->
+                    <?php foreach (array_keys($expClassesArray) as $idExpClasse) { ?>
+                        <input class="form-check-input" type="checkbox" name="idExpClasse[<?= $idExpClasse ?>]" /> <?= $expClassesArray[$idExpClasse] . "\n" ?>
                     <?php } ?>
                 </div>
             </div>
