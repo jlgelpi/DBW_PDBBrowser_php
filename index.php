@@ -21,7 +21,7 @@ if (isset($_REQUEST['new']) or !isset($_SESSION['queryData'])) {
 // end initialization ===================================================================================
 ?>
 
-<?= headerDBW("PDB Browser rev. 2021")?>
+<?= headerDBW("PDB Browser rev. 2026")?>
 <!-- Main Form follows-->
 <form name="MainForm" action="search.php" method="POST" enctype="multipart/form-data">
     <div class="row" style="border-bottom: solid 1px">

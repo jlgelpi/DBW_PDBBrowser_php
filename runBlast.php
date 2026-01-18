@@ -45,8 +45,8 @@ foreach (array_values($result) as $rr) {
         $data = explode ("\t",$rr);
         preg_match('/(....)_(.) mol:([^ ]*) length:([0-9]*) *(.*)/', $data[1], $hits);
         list ($r, $idCode, $sub, $tip, $l, $desc)= $hits;
-        // get compound from entry table
-        $sql = "SELECT compound from entry WHERE idCode = '$idCode'";
+        // get compound from entries table
+        $sql = "SELECT compound from entries WHERE idCode = '$idCode'";
         $rs = mysqli_query($mysqli,$sql) or print mysqli_error($mysqli);
         $rsf = mysqli_fetch_assoc($rs);
         $records[] = ['idCode'=> $idCode, 'sub' => $sub, 'tip' => $tip, 'desc' => $desc, 'compound' => $rsf['compound'], 'ev' => $data[2]];

@@ -75,7 +75,7 @@ if ($_REQUEST['query']) {
 //  main SQL string, make sure that all tables are joint, and relationships included
 // SELECT columns FROM tables WHERE Conditions_from_relationships AND Conditions_from_query_Form
 $sql = "SELECT distinct e.idCode,e.header,e.compound,e.resolution,s.source,et.expType FROM 
-    expType et, author_has_entry ae, author a, source s, entry_has_source es, entry e, sequence sq WHERE
+    expTypes et, author_has_entry ae, authors a, sources s, entry_has_source es, entries e, sequences sq WHERE
     e.idExpType=et.idExpType AND
     ae.idCode=e.idCode and ae.idAuthor=a.idAuthor AND
     es.idCode=e.idCode and es.idsource=s.idSource AND

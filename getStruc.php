@@ -7,7 +7,7 @@
 require "globals.inc.php";
 
 //get data for the structure requested
-$sql = "SELECT e.* from entry e where e.idCode='" . $_REQUEST['idCode'] . "'";
+$sql = "SELECT e.* from entries e where e.idCode='" . $_REQUEST['idCode'] . "'";
 $rs = mysqli_query($mysqli, $sql) or print mysqli_error($mysqli);
 if (!mysqli_num_rows($rs)) { //search is empty
     print errorPage('Not Found', 'The requested structure is not available');
@@ -17,7 +17,7 @@ if (!mysqli_num_rows($rs)) { //search is empty
 $data = mysqli_fetch_assoc($rs);
 // new DB query to get authors
 $data['auts'] = '';
-$rsA = mysqli_query($mysqli, "SELECT * from author a, author_has_entry ae where ae.idCode='" . $data['idCode'] . "' and a.idAuthor = ae.idAuthor order by a.author") or print mysqli_error($mysqli);
+$rsA = mysqli_query($mysqli, "SELECT * from authors a, author_has_entry ae where ae.idCode='" . $data['idCode'] . "' and a.idAuthor = ae.idAuthor order by a.author") or print mysqli_error($mysqli);
 if (mysqli_num_rows($rsA)) {
     $auts = [];
     while ($rsAF = mysqli_fetch_assoc($rsA)) {
@@ -26,7 +26,7 @@ if (mysqli_num_rows($rsA)) {
     $data['auts'] = join(", ", $auts);
 }
 // new DB query to get sources
-$rsA = mysqli_query($mysqli, "SELECT * from source s, entry_has_source es where es.idCode='" . $data['idCode'] . "' and s.idSource = es.idSource order by s.source") or print mysqli_error($mysqli);
+$rsA = mysqli_query($mysqli, "SELECT * from sources s, entry_has_source es where es.idCode='" . $data['idCode'] . "' and s.idSource = es.idSource order by s.source") or print mysqli_error($mysqli);
 $data['sources'] = '';
 if (mysqli_num_rows($rsA)) {
     $sources = [];
@@ -37,7 +37,7 @@ if (mysqli_num_rows($rsA)) {
 }
 // new DB query to get sequences, output in FASTA format
 $data['sequences'] = '';
-$rsA = mysqli_query($mysqli, "SELECT * from sequence s where s.idCode='" . $data['idCode'] . "' order by s.chain") or print mysqli_error($mysqli);
+$rsA = mysqli_query($mysqli, "SELECT * from sequences s where s.idCode='" . $data['idCode'] . "' order by s.chain") or print mysqli_error($mysqli);
 $sequences = [];
 if (mysqli_num_rows($rsA)) {
     while ($sq = mysqli_fetch_assoc($rsA)) { 
@@ -56,7 +56,7 @@ if (mysqli_num_rows($rsA)) {
             <td><?= $data['idCode'] ?></td>
             <td rowspan="5">
                 <a href="http://www.pdb.org/pdb/explore.do?structureId=<?= $data['idCode'] ?>">
-                    <img src="http://mmb.pcb.ub.es/api/pdb/<?= strtolower($data['idCode']) ?>.png" border="0" width="250" ><br>
+                    <img src="http://mdb-login.bsc.es/api/pdb/<?= strtolower($data['idCode']) ?>.png" border="0" width="250" ><br>
                         Link to Protein Data Bank</a>
             </td>
         </tr>
