@@ -55,8 +55,8 @@ if (mysqli_num_rows($rsA)) {
             <td>PDB reference</td>
             <td><?= $data['idCode'] ?></td>
             <td rowspan="5">
-                <a href="http://www.pdb.org/pdb/explore.do?structureId=<?= $data['idCode'] ?>">
-                    <img src="http://mdb-login.bsc.es/api/pdb/<?= strtolower($data['idCode']) ?>.png" border="0" width="250" ><br>
+                <a href="https://www.pdb.org/pdb/explore.do?structureId=<?= $data['idCode'] ?>">
+		    <img src="https://cdn.rcsb.org/images/structures/<?= strtolower($data['idCode']) ?>_assembly-1.jpeg" border="0" width="250" ><br>
                         Link to Protein Data Bank</a>
             </td>
         </tr>
